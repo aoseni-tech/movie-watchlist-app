@@ -38,3 +38,10 @@ class Prod_Config(Config):
     DEBUG = False
     TESTING = False
     DATABASE_URI = environ.get("DATABASE_URI")
+
+
+if environ.get("FLASK_ENV") == 'production':
+    app_config = Prod_Config
+
+else:
+    app_config = Dev_Config

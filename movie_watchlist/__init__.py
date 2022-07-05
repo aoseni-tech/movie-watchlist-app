@@ -1,11 +1,11 @@
 from flask import Flask, g, session
-from .config import Dev_Config
+from .config import app_config
 from flask_wtf.csrf import CSRFProtect
 
 csrf = CSRFProtect()
 
 
-def create_app(app_config=Dev_Config):
+def create_app(app_config=app_config):
     app = Flask(__name__)
 
     app.config.from_object(app_config)
