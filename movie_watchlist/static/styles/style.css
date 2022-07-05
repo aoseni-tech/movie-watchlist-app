@@ -279,7 +279,7 @@ label[for='toggle-theme']::after {
   background-position: 10px 50%;
   padding:8px 16px 8px 32px;
   height: max-content;
-  width: max-content;
+  width: 100%;
 }
 
 .flash-success {
@@ -582,7 +582,6 @@ td .movie-table_link {
     position: absolute;
     right: 0;
     width: 100%;
-    min-width: 400px;
     height: 100vh;
     background-color: var(--background-color);
     box-shadow: var(--box-shadow);
