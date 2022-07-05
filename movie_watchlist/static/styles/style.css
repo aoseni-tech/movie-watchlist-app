@@ -365,7 +365,7 @@ td .movie-table_link {
 .movie-header_title h1 {
   font-size: 1.25rem;
   margin-right: 16px;
-  max-width: 50%;
+  width: 100%;
 }
 
 .movie-header_title a:not(:last-of-type) {
@@ -390,6 +390,8 @@ td .movie-table_link {
   text-decoration: underline;
   transform: scale(0.7);
   font-weight: 600;
+  min-width: max-content;
+  margin-right: -1rem;
 }
 
 .watch-info svg {
