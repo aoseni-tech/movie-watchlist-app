@@ -2,3 +2,5 @@ flask
 psycopg[binary]
 psycopg_pool
 flask-wtf
+python-dotenv
+gunicorn
