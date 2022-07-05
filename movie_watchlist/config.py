@@ -37,7 +37,7 @@ class Prod_Config(Config):
     ENV = "production"
     DEBUG = False
     TESTING = False
-    DATABASE_URI = environ.get("DATABASE_URI")
+    DATABASE_URI = environ.get("DATABASE_URL")
 
 
 if environ.get("FLASK_ENV") == 'production':
