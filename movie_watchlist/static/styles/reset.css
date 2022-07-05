@@ -1,0 +1,93 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+html,
+html:focus-within {
+  scroll-behavior: smooth;
+  overflow: auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  line-height: calc(1em + 0.5rem);
+  text-decoration: none;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+svg {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+a {
+  display: inline-block;
+  color: inherit;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+.display-none {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

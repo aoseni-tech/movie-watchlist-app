@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+{% from "macros/_formhelpers.html" import render_field %}
+
+{% set form_data = form_obj[0] %}
+{% set form_errors = form_obj[1] %}
+
+{% set title_input_error = form_errors.get("title", "") %}
+{% set director_input_error = form_errors.get("director", "") %}
+{% set year_input_error = form_errors.get("year", "") %}
+
+{% set title_input_value = form_data.get("title", "") %}
+{% set director_input_value = form_data.get("director", "") %}
+{% set year_input_value = form_data.get("year", "") %}
+
+{% block content %}
+
+      <form method="POST" action="{{ url_for('movies.movies') }}" class="form movie-form" novalidate>
+
+         {{ form.csrf_token }}
+         {{ render_field(form.title,title_input_error[0],title_input_value) }}
+         {{ render_field(form.director,director_input_error[0],director_input_value) }}
+         {{ render_field(form.year,year_input_error[0],year_input_value) }}
+         <button type="submit" class="button">Add Movie</button>
+
+     </form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% macro render_field(field, input_error, value) %}
+    {% set invalid_input='invalid-input' if input_error else '' %}
+    {% set class_names="form-field " + invalid_input %}
+    <p class="input-group">
+        {{ field.label }} {{ field(class=class_names, value=value if value, **kwargs)|safe}}
+        {% if input_error %}
+            <small class="input_error">
+                {{ input_error }}
+            </small>
+        {% endif %}
+    </p>
+{% endmacro%}
+
+{% macro render_form_addons(input_class, btn_class, values_class, input_name) %}
+    <div>
+        <p class="add-value-container">
+            <input type="text" title="enter {{input_name}}" class="add-value-field form-field {{input_class}}">
+            <button type="button" title="click to add {{input_name}}" class="add-value-btn button {{btn_class}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>
+            </button>
+        </p>
+        <section class="input-values-container {{values_class}}"></section>
+    </div>
+{% endmacro%}

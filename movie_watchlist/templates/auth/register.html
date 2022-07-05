@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+{% from "macros/_formhelpers.html" import render_field %}
+
+{% set email_input_error = form.errors.get("email", "") %}
+{% set password_input_error = form.errors.get("password", "") %}
+{% set confirm_input_error = form.errors.get("confirm", "") %}
+
+{% set email_input_value = form.data.get("email", "") %}
+{% set password_input_value = "" %}
+{% set confirm_input_value = "" %}
+
+{% block content %}
+      
+      <form method="POST" action="{{ url_for('auth.register') }}" class="form movie-form" novalidate>
+
+         {{ form.csrf_token }}
+         {{ render_field(form.email,email_input_error[0],email_input_value) }}
+         {{ render_field(form.password,password_input_error[0],password_input_value) }}
+         {{ render_field(form.confirm,confirm_input_error[0],confirm_input_value) }}
+
+         <small class="form-referer">Already have an account?  <a href="{{ url_for('auth.login') }}"> Log in here.</a></small>
+
+         <button type="submit" class="button">Register</button>
+
+     </form>
+
+
+{% endblock %}

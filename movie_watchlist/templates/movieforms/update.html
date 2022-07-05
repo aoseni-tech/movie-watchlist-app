@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+{% from "macros/_formhelpers.html" import render_field, render_form_addons %}
+
+{% set title_input_error = form.errors.get("title", "") %}
+{% set director_input_error = form.errors.get("director", "") %}
+{% set year_input_error = form.errors.get("year", "") %}
+{% set cast_input_error = form.errors.get("casts", "") %}
+{% set series_input_error = form.errors.get("series", "") %}
+{% set tags_input_error = form.errors.get("tags", "") %}
+{% set description_input_error = form.errors.get("description", "") %}
+{% set video_input_error = form.errors.get("video", "") %}
+
+{% set title_input_value = form.title._value() %}
+{% set director_input_value = form.director._value() %}
+{% set year_input_value = form.year._value() %}
+{% set cast_input_value = form.casts._value() %}
+{% set series_input_value = form.series._value() %}
+{% set tags_input_value = form.tags._value() %}
+{% set description_input_value = form.description._value() %}
+{% set video_input_value = form.video._value() %}
+
+{% block content %}
+
+      <div class="update-header">
+             <p>Edit movie details</p> <span>or</span> <a href="{{ url_for('movies.show', id=movie_id) }}">Continue</a>
+       </div>
+      <form method="POST" action="{{ url_for('movies.edit', id=movie_id) }}" class="form movie-form" novalidate>
+
+         {{ form.csrf_token }}
+         {{ render_field(form.title,title_input_error[0],title_input_value) }}
+         {{ render_field(form.director,director_input_error[0],director_input_value) }}
+         {{ render_field(form.year,year_input_error[0],year_input_value) }}
+
+         {{ render_field(form.casts,cast_input_error[0],cast_input_value, class="casts-input") }}
+         {{ render_form_addons("cast-value", "add-cast-btn", "casts-values", "cast") }}
+
+         {{ render_field(form.series,series_input_error[0],series_input_value, class="series-input") }}
+         {{ render_form_addons("series-value", "add-series-btn", "series-values", "series") }}
+   
+         {{ render_field(form.tags,tags_input_error[0],tags_input_value, class="tags-input") }}
+         {{ render_form_addons("tag-value", "add-tag-btn", "tags-values", "tag") }}
+
+         {{ render_field(form.description,description_input_error[0],description_input_value, cols=10, rows=5) }}
+         {{ render_field(form.video,video_input_error[0],video_input_value, cols=10, rows=5) }}
+         <button type="submit" class="button">Update Movie</button>
+
+     </form>
+
+
+{% endblock %}

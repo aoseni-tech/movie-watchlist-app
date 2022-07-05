@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% if movies %}
+<h2>MOVIES</h2>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Year</th>
+        <th>Avg Rating</th>
+    </tr>
+    {% for movie in movies %}
+    {% set avg_rating = movie.get('average_rating') if movie.get('average_rating') else 'N/A' %}
+    <tr>                
+        <td><a href="{{ url_for('movies.show', id=movie['movie_id']) }}" class="movie-table_link">{{ movie['title'] }}</a></td>
+        <td>{{ movie['director'] }}</td>
+        <td>{{ movie['year'] }}</td>                
+        <td>{{  avg_rating }}</td>                
+    </tr>
+    {% endfor %}
+</table>
+{%else%}
+<p>No movie added yet check back later or <a style="color: #f56565;" href="{{ url_for('movies.new') }}"><em>click</em></a> to add movie</p>
+{% endif %}
+{% endblock %}

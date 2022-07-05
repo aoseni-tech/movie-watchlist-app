@@ -1,0 +1,22 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    {% if movies %}
+        <h2>MY MOVIES</h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Director</th>
+                <th>Year</th>
+            </tr>
+            {% for movie in movies %}
+            <tr>                
+                <td><a href="{{ url_for('movies.show', id=movie['movie_id']) }}" class="movie-table_link">{{ movie['title'] }}</a></td>
+                <td>{{ movie['director'] }}</td>
+                <td>{{ movie['year'] }}</td>                
+            </tr>
+            {% endfor %}
+        </table>
+    {%else%}
+        <p>You have not added a movie yet, <a style="color: #f56565;" href="{{ url_for('movies.new') }}"><em>click</em></a> to add movie</p>
+    {% endif %}
+{% endblock %}

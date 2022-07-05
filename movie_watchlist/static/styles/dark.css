@@ -1,0 +1,25 @@
+.dark-mode {
+    --text-dark: #fbf2f2;
+    --text-light: #000;
+  
+    --background-color: #1c2023;
+    --accent-colour: #f56565;
+    --accent-colour-2: #62b86c;
+    --tag-colour: var(--accent-colour-2);
+    --box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.2);
+
+    --error-msg: #f58080;
+  
+    --border: 3px solid #fff;
+    --image-filter: grayscale(50%);
+    --icon-filter: invert(100%);
+    --icon-filter_hover: invert(40%);
+  }
+  
+  .dark-mode img:not([src*='.svg']) {
+    filter: var(--image-filter);
+  }
+  
+  .dark-mode img[src*='.svg'] {
+    filter: var(--icon-filter);
+  }

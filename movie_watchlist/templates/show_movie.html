@@ -1,0 +1,138 @@
+{% extends 'layouts/base.html' %}
+{% block main_class%}movie-container{% endblock %}
+{% block content %}
+    {% if movie %}
+    {% set user_rating = movie.get('rating') if movie.get('rating') else 0 %}
+    {% set avg_rating = movie.get('average_rating') %}
+    <header class="movie-header">
+        <section class="movie-header_title">
+            <h1>{{movie['title']}} - <span style="font-size: 0.8rem;">{{movie['year']}}</span></h1>
+            <div class="ratings" title="your rating - {{user_rating}}">
+                {% for i in range (1,6) %}
+                <a href="{{url_for('movies.ratings', id=movie['movie_id'], rating=i)}}" class="{{'star-filled' if i <= user_rating}}" title="{{i}} star rating">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                </svg>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+        {% set watch = not movie.get('watched') %}
+        {% set bookmark =  not movie.get('bookmark') %}
+       <div class="watch-info-control">
+        <a href="{{ url_for('movies.watch', movie_id=movie['movie_id'], user_id=user['user_id'], watched=watch, bookmark=movie['bookmark']) }}" class="watch-info {{ "has-watched" if movie['watched'] }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M5 12l5 5l10 -10" />
+            </svg>
+            {{ "Watched" if movie['watched'] else "Not watched"}}           
+        </a>
+        <a href="{{ url_for('movies.watch', movie_id=movie['movie_id'], user_id=user['user_id'], watched=movie['watched'], bookmark=bookmark) }}" class="watch-info {{ "bookmarked" if movie['bookmark'] }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bookmark" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M9 4h6a2 2 0 0 1 2 2v14l-5 -3l-5 3v-14a2 2 0 0 1 2 -2" />
+            </svg>
+            {{ "Want to watch" if movie['bookmark'] else "Bookmark"}}           
+        </a>
+       </div>
+    </header>
+
+    <section class="movie-control_container">
+        {% if user and user["user_id"] == movie["user_id"] %}
+        <a href="{{ url_for('movies.edit', id=movie['movie_id']) }}" class="movie-control edit-button">
+        <span>Edit</span>    
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+            <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+         </svg>
+        </a>
+        <form action="{{url_for('movies.delete', id=movie['movie_id'])}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input type="hidden" name="owner" value="{{movie['user_id']}}">
+            <button type="submit" href="{{ url_for('movies.edit', id=movie['movie_id']) }}" class="movie-control delete-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+                Remove
+            </button>
+        </form>
+        {% endif %}
+    </section>
+
+    <article class="movie-details">
+    
+    {% if movie['video'] %}
+        <iframe
+            title="movie trailer video"
+            class="movie__video"
+            src="{{ movie['video'] }}">
+        </iframe>
+    {% endif %}
+
+    <section class="tags-ratings">
+        {% if movie['tags'] %}
+            <div class="movie-tags">
+                {% for tag in movie['tags'] %}
+                <p class="movie-tag">{{tag}}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if avg_rating %}
+            <p class="average-rating">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                </svg>
+                <span>{{avg_rating|round(1)}}<small>/5</small></span>
+            </p>
+        {% endif %}
+    </section>
+
+    {% if movie['description'] %}
+    <p class="movie-description">{{movie['description']}}</p>
+    {% endif %}
+
+    <div class="movie-director">
+        <h2>Director</h2>
+        <p>{{movie['director']}}</p>
+    </div>
+    
+    {% if movie['casts'] or movie['series'] %}
+        <div class="movie-meta">
+
+            {% if movie['casts'] %}
+                <div class="movie-meta_casts">
+                    <h2>Casts</h2>
+                    <ul>
+                        {% for cast in movie['casts'] %}
+                        <li>{{cast}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>                
+            {% endif %}
+
+            {% if movie['series'] %}
+                <div class="movie-meta_series">
+                    <h2>Series</h2>
+                    <ul>
+                        {% for series in movie['series'] %}
+                        <li>{{series}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>                
+            {% endif %}
+
+        </div>
+    {% endif %}        
+
+    </article>
+
+    {% endif %}
+{% endblock %}

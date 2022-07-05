@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fafafa" />
+    <title>{{ title if title }}{{ ' | ' if title}}Movie Watchlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='img/brand_logo.svg') }}"
+      type="image/x-icon"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='img/brand_logo_dark.svg') }}"
+      type="image/x-icon"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/dark.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/reset.css') }}"/>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <div class="container">
+        <div class="brand">
+          <a href="{{ url_for('home.home_page')}}" class="brand-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-film" viewBox="0 0 16 16">
+              <path d="M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1zm4 0v6h8V1H4zm8 8H4v6h8V9zM1 1v2h2V1H1zm2 3H1v2h2V4zM1 7v2h2V7H1zm2 3H1v2h2v-2zm-2 3v2h2v-2H1zM15 1h-2v2h2V1zm-2 3v2h2V4h-2zm2 3h-2v2h2V7zm-2 3v2h2v-2h-2zm2 3h-2v2h2v-2z"/>
+            </svg>
+            <h3 class="brand-name">WATCHLIST</h3>
+          </a>
+        </div>
+
+        <input type="checkbox" id="toggle-menu" title="click to toggle menu open or close" class="visually-hidden">
+        <label for="toggle-menu">
+              <div class="menu-burger"></div>
+              <div class="menu-burger"></div>
+              <div class="menu-burger"></div>
+        </label> 
+        
+        <div class="menu">
+          {% if user %}
+
+          <a href="{{ url_for('movies.movies') }}" class="menu-link {{ 'active--link' if request.path == url_for('movies.movies') }}">MY LIST</a>
+
+          <a href="{{ url_for('movies.new') }}" class="menu-link {{ 'active--link' if request.path == url_for('movies.new') }}">ADD MOVIES</a>
+
+          <a href="{{ url_for('auth.logout') }}" class="menu-link">LOG OUT</a>
+
+          {% else %}
+
+          <a href="{{ url_for('auth.login') }}" class="menu-link {{ 'active--link' if request.path == url_for('auth.login') }}">LOG IN</a>
+          <a href="{{ url_for('auth.register') }}" class="menu-link {{ 'active--link' if request.path == url_for('auth.register') }}">REGISTER</a>
+
+          {% endif %}
+
+          <input type="checkbox" id="toggle-theme" title="click to toggle theme" class="visually-hidden">
+          <label for="toggle-theme"></label> 
+        
+        </div>
+      </div>
+    </nav>
+
+    <main class="main container {% block main_class %}{% endblock %}">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <p class="flash flash-{{category}}">
+              {{ message }}
+                <button type="button" title="close" class="flash-close"></button> 
+            </p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="footer">
+      <small>Copyright ©2022. Movies Watchlist. All rights reserved</small>
+    </footer>
+
+    <script src="{{ url_for('static', filename='scripts/darkmode.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+    {% set url_paths = [url_for('movies.movies'), url_for('movies.new'), url_for('auth.register'), url_for('auth.login')] %}
+    {% set path = request.path %}
+    {% if path in  url_paths or ('movies' in path and path.endswith("/edit/"))%}
+    <script src="{{ url_for('static', filename='scripts/form_validator.js') }}"></script>
+    {% endif %}
+  </body>
+</html>
