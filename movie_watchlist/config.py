@@ -33,8 +33,7 @@ class Test_Config(Config):
 
 class Prod_Config(Config):
     """Development configuration"""
-
-    ENV = "PRODUCTION"
+    
     DEBUG = False
     TESTING = False
     DATABASE_URI = environ.get("DATABASE_URL")
