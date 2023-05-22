@@ -34,14 +34,13 @@ class Test_Config(Config):
 class Prod_Config(Config):
     """Development configuration"""
 
-    ENV = "production"
+    ENV = "PRODUCTION"
     DEBUG = False
     TESTING = False
     DATABASE_URI = environ.get("DATABASE_URL")
 
 
-if environ.get("FLASK_ENV") == 'production':
+if environ.get("FLASK_ENV") == "PRODUCTION":
     app_config = Prod_Config
-
 else:
     app_config = Dev_Config
