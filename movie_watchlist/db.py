@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
 from psycopg_pool import ConnectionPool
 from psycopg.rows import dict_row
-from psycopg import Error as pscopg_error
 from functools import wraps
 from typing import Callable
 from .schema import commands
-from uuid import uuid4
 
 from flask import Flask
 

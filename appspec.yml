@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/movie_watchlist_app/
+file_exists_behavior: OVERWRITE
+hooks:
+  AfterInstall:
+    - location: Scripts/activate_venv.sh
+      timeout: 300
+    - location: Scripts/install_packages.sh
+      timeout: 300
+  ApplicationStart:
+    - location: Scripts/start_app.sh
+      timeout: 120
+  ApplicationStop:
+    - location: Scripts/stop_app.sh
+      timeout: 120
