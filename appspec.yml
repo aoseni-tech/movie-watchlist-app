@@ -1,9 +1,11 @@
 version: 0.0
 os: linux
 files:
-  - source: /movie_watchlist/
+  - source: movie_watchlist/
     destination: /home/ec2-user/movie_watchlist_app/movie_watchlist/
-  - source: /save_pid.txt
+  - source: save_pid.txt
+    destination: /home/ec2-user/movie_watchlist_app/
+  - source: requirements.txt
     destination: /home/ec2-user/movie_watchlist_app/
 file_exists_behavior: OVERWRITE
 hooks:
