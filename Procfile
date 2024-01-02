@@ -1,1 +1,0 @@
-web: gunicorn -w 4 "movie_watchlist:create_app()"
