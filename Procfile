@@ -1,1 +1,1 @@
-web: gunicorn "movie_watchlist:create_app"
+web: gunicorn 'wsgi:application'
