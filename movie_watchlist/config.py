@@ -36,7 +36,11 @@ class Prod_Config(Config):
     
     DEBUG = False
     TESTING = False
-    DATABASE_URI = environ.get("DATABASE_URI")
+    DATABASE_HOST = environ.get("DATABASE_HOST")
+    DATABASE_USER = environ.get("DATABASE_USER")
+    DATABASE_PASSWORD = environ.get("DATABASE_PASSWORD")
+    DATABASE_PORT = environ.get("DATABASE_PORT")
+    DATABASE_NAME = environ.get("DATABASE_NAME")
 
 
 if environ.get("FLASK_ENV") == "PRODUCTION":

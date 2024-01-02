@@ -16,7 +16,14 @@ class Psycopg_Db:
     conn_pool: ConnectionPool = field(init=False, default=None)
 
     def __post_init__(self) -> None:
-        self.conn_pool = ConnectionPool(self.app.config["DATABASE_URI"], timeout=3.0)
+        self.conn_pool = ConnectionPool(
+            f'''host={self.app.config["DATABASE_HOST"]}
+            port={self.app.config["DATABASE_PORT"]}
+            dbname={self.app.config["DATABASE_NAME"]}
+            user={self.app.config["DATABASE_USER"]}
+            password={self.app.config["DATABASE_PASSWORD"]}''',
+            timeout=10.0
+            )
 
     def query_db(fn: Callable):
         @wraps(fn)
