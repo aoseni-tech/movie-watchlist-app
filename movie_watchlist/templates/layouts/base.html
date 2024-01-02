@@ -86,7 +86,7 @@
       {% block content %}{% endblock %}
     </main>
     <footer class="footer">
-      <small>Copyright ©2022. Movies Watchlist. All rights reserved</small>
+      <small>Copyright ©{{ now.year }}. Movies Watchlist. All rights reserved</small>
     </footer>
 
     <script src="{{ url_for('static', filename='scripts/darkmode.js') }}"></script>

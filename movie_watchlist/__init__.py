@@ -1,6 +1,7 @@
 from flask import Flask, g, session
 from .config import app_config
 from flask_wtf.csrf import CSRFProtect
+from datetime import datetime
 
 csrf = CSRFProtect()
 
@@ -41,6 +42,6 @@ def create_app(app_config=app_config, **kwargs):
 
     @app.context_processor
     def inject_user():
-        return dict(user=g.user)
+        return dict(user=g.user, now=datetime.utcnow())
 
     return app
