@@ -13,6 +13,7 @@ It is a full stack web application written mostly in Python with the Flask frame
 Click the link above to explore. You can sign up or login with the credentials below: 
 
 Username: guest 
+
 Password: Guest@123 
 
 # Technologies Used
