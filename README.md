@@ -11,6 +11,7 @@ Users can browse the app either as a guest or an authenticated user. Authenticat
 It is a full stack web application written mostly in Python with the Flask framework. It uses PostgreSQL database to store, query and process data. 
 
 Click the link above to explore. You can sign up or login with the credentials below: 
+
 Username: guest 
 Password: Guest@123 
 
