@@ -14,7 +14,7 @@ Username: guest
 
 Password: Guest@123 
 
-# Technologies Used
+## Technologies Used
 - ### Flask 
    The web framework used to build the app
 - ### PostgreSQL
