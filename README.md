@@ -1,9 +1,7 @@
-# Movie Watchllist app
-This is a movie watchlist app built with Python web framework Flask.
-
-## Features
+## Movie Watchllist app
 Movie Watchlist is a web application where users can discover movies, save a list of movies they would like to watch and rate movies.  
 
+## Features
 It has a responsive and simple design with a color scheme that comes in light and dark mode.  
 
 Users can browse the app either as a guest or an authenticated user. Authenticated users have a movie list that is visible to other users. Users can rate movies they have watched or bookmark it to watch later.  
