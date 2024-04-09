@@ -19,6 +19,8 @@ Password: Guest@123
    The web framework used to build the app
 - ### PostgreSQL
    The database used for the app
+- ### JavaScript
+   Page Interactivity
 - ### HTML
    The Markup Language
 - ### CSS
