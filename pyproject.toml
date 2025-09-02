@@ -1,0 +1,15 @@
+[project]
+name = "movie_watchlist"
+version = "1.0.0"
+description = "Movie Watchlist is a web application where users can discover movies, save a list of movies they would like to watch and rate movies."
+dependencies = [
+    "flask",
+    "psycopg[binary]",
+    "psycopg_pool",
+    "flask-wtf",
+    "python-dotenv"
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
