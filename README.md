@@ -1,29 +1,56 @@
-## Movie Watchllist app
-Movie Watchlist is a web application where users can discover movies, save a list of movies they would like to watch and rate movies.  
+# 🎬 Movie Watchlist App
 
-## Features
-It has a responsive and simple design with a color scheme that comes in light and dark mode.  
+A responsive, full-stack Flask web application that enables users to **discover movies**, **add them to a watchlist**, and **rate movies** they've seen. Built with a PostgreSQL backend, the app features both guest and authenticated experiences, light/dark mode themes, and is deployed on **Google Cloud Run** with a PostgreSQL database hosted on **Azure**.
 
-Users can browse the app either as a guest or an authenticated user. Authenticated users have a movie list that is visible to other users. Users can rate movies they have watched or bookmark it to watch later.  
+---
 
-It is a full stack web application written mostly in Python with the Flask framework. It uses PostgreSQL database to store, query and process data. 
+##  Live Demo
 
-Click the link above to explore. You can sign up or login with the credentials below: 
+[Visit the Live App](https://movie-watchlist-976221425311.us-west2.run.app/)
 
-Username: guest 
+- **Demo Credentials:**
+  - **Username:** `guest`
+  - **Password:** `Guest@123`
 
-Password: Guest@123 
+---
 
-## Technologies Used
-- ### Flask 
-   The web framework used to build the app
-- ### PostgreSQL
-   The database used for the app
-- ### JavaScript
-   Page Interactivity
-- ### HTML
-   The Markup Language
-- ### CSS
-   For styling the html
-- ### Psycopg3
-   The Python Postgresql adapter 
+##  Tech Stack
+
+- **Backend:** Python, Flask, Psycopg3
+- **Database:** PostgreSQL (hosted on Azure)
+- **Frontend:** HTML, CSS, JavaScript
+- **Deployment:** Google Cloud Run (serverless hosting)
+- **Others:** Responsive design, light/dark mode support
+
+---
+
+##  Features
+
+- **Flexible User Modes**: Browse as a guest or register to save personal movie ratings and watchlists visible to others.
+- **Movie Actions**: Search for movies, bookmark titles to watch later, and rate titles you've seen.
+- **User Profiles**: Public and private profiles feature personalized lists and ratings.
+- **Responsive UI**: Mobile-friendly layout with toggle for light and dark themes.
+- **Secure Backend**: Flask session-based authentication, backend validation, and error handling.
+
+---
+
+##  Local Setup
+
+To run the app locally, follow these steps:
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/aoseni-tech/movie-watchlist-app.git
+cd movie-watchlist-app
+
+# 2. Set up a virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Set environment variables
+
+# 5. Run the development server
+flask run
