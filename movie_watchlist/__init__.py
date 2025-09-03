@@ -1,12 +1,12 @@
 from flask import Flask, g, session
-from .config import app_config
+from .config import Config
 from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
 
 csrf = CSRFProtect()
 
 
-def create_app(app_config=app_config, **kwargs):
+def create_app(app_config=Config, **kwargs):
     app = Flask(__name__)
 
     app.config.from_object(app_config)

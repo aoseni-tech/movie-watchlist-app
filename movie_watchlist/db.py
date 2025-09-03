@@ -17,11 +17,7 @@ class Psycopg_Db:
 
     def __post_init__(self) -> None:
         self.conn_pool = ConnectionPool(
-            f'''host={self.app.config["DATABASE_HOST"]}
-            port={self.app.config["DATABASE_PORT"]}
-            dbname={self.app.config["DATABASE_NAME"]}
-            user={self.app.config["DATABASE_USER"]}
-            password={self.app.config["DATABASE_PASSWORD"]}''',
+            f"{self.app.config["DATABASE_URL"]}",
             timeout=10.0
             )
 
